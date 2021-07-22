@@ -69,7 +69,7 @@ def load_experts(foldername, version="V1"):
     }
     authors = dict()
 
-    if version == "V1":
+    if version == "V2" or version == "V3":
         for topic, filename in list_of_files.items():
             authors[topic] = list()
             file = pkg_resources.resource_filename("expert_finding", os.path.join(foldername, filename))
@@ -81,7 +81,7 @@ def load_experts(foldername, version="V1"):
                         authors[topic].append(string)
                     except:
                         print("Can't decode:", line)
-    elif version == "V2":
+    elif version == "V1":
         for topic, filename in list_of_new_files.items():
             authors[topic] = list()
             file = pkg_resources.resource_filename("expert_finding", os.path.join(foldername, filename))

@@ -21,9 +21,7 @@ def save_as_json(path, name, data_to_save):
 
 
 def load_as_json(path, name):
-    # file_path = os.path.join(path, name)
     file_path = path + "/" + name
-    # print("Load as json file: ", file_path)
     with open(file_path, 'r') as infile:
         data_loaded = json.load(infile)
     return data_loaded

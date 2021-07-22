@@ -49,7 +49,7 @@ class VotingModel:
         else:
             doc_rep_dir = os.path.join(self.input_dir, "documents_representations")
             self.language_model = expert_finding.language_models.wrapper.LanguageModel(doc_rep_dir,
-                                                                                                    type=self.type)
+                                                                                       type=self.type)
         self.dataset = dataset
         self.k = self.parameter['k']
         # self.candidates_scores = np.zeros(6012)
@@ -57,7 +57,8 @@ class VotingModel:
         # self.all = range(0, self.length)
 
     def predict(self, i, query, leave_one_out=None, k=None):
-
+        candidates_scores = []
+        candidates_scores_doc_num = []
         if self.parameter['model_name'] is "tfidf":
             documents_scores = self.language_model.compute_similarity(query)
             documents_sorting_indices = documents_scores.argsort()[::-1]
@@ -68,29 +69,16 @@ class VotingModel:
                 time_start = time.time()
                 res_distance, res_index = self.embedding_PG_index.search(np.array([query_vector_emb], dtype='float32'),
                                                                          1000)
-                documents_scores = res_distance[0][::-1]
-                documents_sorting_indices = res_index[0][::-1]
-
-                print("ALllen=", len(self.embedding_docs_vectors), "query_num=", 1000, "document_rank time:",
-                      time.time() - time_start)
+                documents_scores = res_distance[0]
+                documents_sorting_indices = res_index[0]
                 candidates_scores, candidates_scores_doc_num = self.candidates_avg(documents_scores,
                                                                                    documents_sorting_indices, 1)
             else:
-                # time_start = time.time()
                 documents_scores = np.squeeze(query_vector_emb.dot(self.embedding_docs_vectors.T))
                 # documents_scores = vector_matrix(query_vector_emb, self.embedding_docs_vectors)
                 documents_sorting_indices = documents_scores.argsort()[::-1]
-                # print("ALllen=", len(self.embedding_docs_vectors), "query_num=", 1000, "document_rank time:",
-                #       time.time() - time_start)
                 candidates_scores, candidates_scores_doc_num = self.candidates_avg(documents_scores,
                                                                                    documents_sorting_indices, 0)
-
-        # 对所有文章[2, 22, 91, 213, 1,...,12]  每篇文章的排名. k 后面的排名统统为len() - 1.
-        # document_ranks = documents_sorting_indices.argsort() + 1  # 当前方法的document_rank index 序号.
-        # candidates_scores = np.ravel(
-        #     self.dataset.ds.associations.T.dot(scipy.sparse.diags(documents_scores, 0)).T.sum(
-        #         axis=0))  # A.T.dot(np.diag(b)) multiply each column of A element-wise by b
-        # return candidates_scores
 
         return candidates_scores, candidates_scores_doc_num
 

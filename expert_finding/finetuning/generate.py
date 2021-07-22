@@ -72,7 +72,7 @@ class Generator:
                         S.add(a_doc)
 
             if len(Phi[doc]) >= k:
-                Tque = Tque.union(Phi[doc])
+                Tque.union(Phi[doc])
             else:
                 Qque.add(doc)
 

@@ -17,7 +17,7 @@ def train(config, work_dir, triples_dir, triples_name, version, encoder_name):
     num_epochs = 4
     dataset = sets.DataSet("aminer")
     data_path = os.path.join(work_dir, version, "dataset_associations")
-    dataset.load(data_path)
+    dataset.load_data(data_path)
     T = dataset.ds.documents
 
     model_save_path = data_path + '/output/' + encoder_name

@@ -28,7 +28,7 @@ class GroundTruth:
 
 
 class DataSet:
-    def __init__(self, name, documents_file_path=None, experts_folder_path=None, version=None, type=None):
+    def __init__(self, name="data", documents_file_path=None, experts_folder_path=None, version=None, type=None):
         self._name = name
         self.ds = DataFrame(name)
         self.gt = GroundTruth(name)
@@ -69,7 +69,6 @@ class DataSet:
         mask = set(cands_mask)
         self.ds.candidates = [e for i, e in enumerate(self.ds.candidates) if i in mask]
         self.print_stats()
-
 
     def clean_associations(self, max_documents_per_candidates=None, min_documents_per_candidates=None):
         num_docs_per_can = np.squeeze(np.asarray(self.ds.associations.sum(axis=0)))
@@ -123,8 +122,6 @@ class DataSet:
 
         self.print_stats()
 
-
-
     def save(self, dir_path):
         expert_finding.data.io.save_as_json(dir_path, "df_documents", self.ds.documents)
         expert_finding.data.io.save_as_json(dir_path, "df_candidates", self.ds.candidates)
@@ -136,7 +133,6 @@ class DataSet:
         expert_finding.data.io.save_as_json(dir_path, "gt_candidates", self.gt.candidates)
         expert_finding.data.io.save_as_json(dir_path, "gt_experts_mask", self.gt.experts_mask.tolist())
         scipy.sparse.save_npz(os.path.join(dir_path, "gt_associations"), self.gt.associations)
-
 
     def load_data(self, dir_path):
         self.ds.documents = expert_finding.data.io.load_as_json(dir_path, "df_documents")
@@ -279,7 +275,6 @@ class DataSet:
         self.ds.publish = scipy.sparse.csr_matrix((np.array(dat), (np.array(row_ind), np.array(col_ind))),
                                                   shape=(M, N))
         self.print_stats()
-
 
     def author_weight(self, index, dem):
         return 1.0 / ((index + 1) * dem)

@@ -13,7 +13,7 @@ import scipy
 current_folder = os.path.dirname(os.path.abspath(__file__))
 
 
-def run(version, model_dir, model_name, work_dir, index, k, dataset_type):
+def run(version, model_dir, model_name, work_dir, index, m, dataset_type):
     input_dir = os.path.join(work_dir, version, dataset_type)
     output_dir = os.path.join(work_dir, version, dataset_type, "result")
     parameters = {
@@ -32,7 +32,7 @@ def run(version, model_dir, model_name, work_dir, index, k, dataset_type):
         'max_queries': 100,
         'dump_dir': output_dir,
         'index': index,
-        'k': k,
+        'k': m,
     }
     expert_finding.main.evaluate.run(parameters)
 
@@ -120,7 +120,7 @@ def candidates_rank_baseTA(dataset, document_sorting_indices, parameter, k):
             authors_index = np.flatnonzero(d_a[doc])
             for idx in authors_index:
                 if idx not in dict:
-                    a_idx = CompareAble(idx=i, lwbound=1 / (i + 1), upbound=7.21)
+                    a_idx = CompareAble(idx=i, lwbound=1 / (i + 1), upbound=dict[idx])
                 else:
                     dict[idx].lwbound += 1 / (i + 1)
                 author_scores[idx] += 1 / (i + 1)
