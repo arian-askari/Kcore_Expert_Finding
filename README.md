@@ -6,7 +6,7 @@ This is a description of the code used for the experiments described in the pape
 
 #### 2. Requirements
 
-Our code \cite{code} were implemented in Python3.8, the experiments have been run on a Linux server with two 24 cores CPU (Intel(R) 6248R 3.0GHZ) and 768GB memory, as well as 8 Tesla V100s GPUs (32G memory).
+Our code were implemented in Python3.8, the experiments have been run on a Linux server with two 24 cores CPU (Intel(R) 6248R 3.0GHZ) and 768GB memory, as well as 8 Tesla V100s GPUs (32G memory).
 
 #### 3. DataSets
 
@@ -14,7 +14,7 @@ We used three real-work academic networks: Aminer, DBLP, and ACM. Each one provi
 
 #### 4. Parameters
 
-We implemented our solution based on an open source NLP project HuggingFace providing many pre-trained models. The default parameters are: $(k,\mathcal{P})$-core for $k$ = $4$ and $\mathcal{P}\in\{P$-$A$-$P$, $P$-$T$-$P$, $P$-$P\}$ (we use $P$-$A$-$P$ and $P$-$T$-$P$ together as default), sampling ratio $f$ = $0.3$ for training data generation, near negative strategy for negative samples collection (collect $s$ = $3$ negative samples for per positive sample), top-$m$ papers retrieval for $m$ = $1000$, and top-$n$ experts finding for $n$ = $20$. Moreover, we trained our model by setting the margin of our loss function as $c$ = $1$, epochs = $4$, and the batch size of 64 for gradient accumulation.
+We implemented our solution based on an open source NLP project HuggingFace providing many pre-trained models. The default parameters are: (*k,P*)-core for k = 4 and P-A-P, P-T-P, P-P  (we use P-A-P and P-T-P together as default), sampling ratio f = 0.3 for training data generation, near negative strategy for negative samples collection (collect s = 3 negative samples for per positive sample), top-m papers retrieval for m = 1000, and top-n experts finding for n = 20. Moreover, we trained our model by setting the margin of our loss function as c = 1, epochs = 4, and the batch size of 64 for gradient accumulation.
 
 #### 5. Usage
 
@@ -27,7 +27,7 @@ conda activate expert_finding
 
 Then run:
 
-```
+```shell
 git clone https://github.com/leleyi/Kcore_Expert_Finding.git
 cd Kcore_Expert_Finding
 pip install -r requirements.txt  
@@ -46,7 +46,7 @@ python data_processing.py
 
 We train our model by using the following script (in *finetune* folder). All the arguments for this script are given as: *trining data, pre-trained model, output_dir, hyperparameter1, hyperparameter2*.
 
-````
+````python
 cd finetune
 python train_model.py --triple "./triplets" --model "model_name" --save_dir "./" --batch-size 64 --num-epochs 4
 ````
@@ -63,15 +63,15 @@ python efficiency_content.py # Text-based query based on content embedding, e.g.
 
 ##### 5.4 Effect of different meta-paths
 
-We run this script to evaluate the effect of different meta-paths on the effectiveness. Including *P-A-P, P-T-P, P-P, P-A-P$\cap$ P-T-P-, P-P$\cap$ P-T-P, P-A-P$\cap$ P-P, P-A-P$\cap$ P-P$\cap$ P-T-P*.
+We run this script to evaluate the effect of different meta-paths on the effectiveness. Including *P-A-P, P-T-P, P-P, P-A-P P-T-P-, P-P P-T-P, P-A-P P-P, P-A-P P-P P-T-P*.
 
-```
+```python
 python effect_metapath.py
 ```
 
 #####  5.5 Parameter Sensitivity
 
-In order to explore the effect of different parameters on our model, such as *sampling ratio*, *the size $k$ of $k$-core*, etc., we run the following script to get the evaluation results.
+In order to explore the effect of different parameters on our model, such as *sampling ratio*, *the size k of k-core*, etc., we run the following script to get the evaluation results.
 
 ```
 python parameters.py
