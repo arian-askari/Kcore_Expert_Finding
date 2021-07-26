@@ -16,7 +16,7 @@ def train(config, work_dir, triples_dir, triples_name, version, encoder_name):
     train_batch_size = config['batch']
     num_epochs = config['epoch']
     dataset = sets.DataSet("aminer")
-    data_path = os.path.join(work_dir, version, "dataset_associations")
+    data_path = os.path.join(work_dir, version, "dataset_cleaned")
     dataset.load_data(data_path)
     T = dataset.ds.documents
 

@@ -35,7 +35,7 @@ def fetch(type=None, data_dir=None):
 
 def representation():
     datasets_versions = ["V1", "V2", "V3"]
-    datasets_types = ["dataset_full", "dataset_cleaned", "dataset_associations"]
+    datasets_types = ["dataset_cleaned"]
     for dv in datasets_versions:
         for dt in datasets_types:
             input_dir = os.path.join(current_folder, 'output/', 'data/', dv, dt)

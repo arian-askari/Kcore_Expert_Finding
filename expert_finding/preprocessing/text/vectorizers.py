@@ -15,7 +15,7 @@ import os
 
 
 def get_tf_dictionary(dictionary):
-    # data_path = "/ddisk/lj/DBLP/data/V1/dataset_associations"
+    # data_path = "/ddisk/lj/DBLP/data/V1/dataset_cleaned"
     # if os.path.exists(data_path + "/embedding/tf_matrix"):
     #     print("load tf_matrix from fils")
     #     with open(data_path + "/embedding/tf_matrix", "rb") as f:

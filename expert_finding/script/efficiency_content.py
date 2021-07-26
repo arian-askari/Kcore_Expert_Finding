@@ -6,7 +6,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 work_dir = os.path.join(current_dir, "output/data")
 communities_path = os.path.join(work_dir, "triples")
 
-data_type = "dataset_associations"
+data_type = "dataset_cleaned"
 path = "PAP"
 kcore = [4, 5, 5]
 rate = [0.3, 0.3, 0.3]

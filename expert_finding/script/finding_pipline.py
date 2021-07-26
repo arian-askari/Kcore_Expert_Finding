@@ -15,7 +15,7 @@ os.environ['CUDA_VISIBLE_DEVICES'] = "0"
 
 
 class ExpertFind:
-    def __init__(self, work_dir, communities_path, sample_rate=0.3, meta_path="PAP", data_type="datast_associations",
+    def __init__(self, work_dir, communities_path , sample_rate=0.3, meta_path="PAP", data_type="datast_associations",
                  kcore=5, version="V1"):
         self.stage = 0
         self.core_k = kcore

@@ -31,7 +31,7 @@ def train(work_dir, version, encoder_name="GloVe"):
     # Read the dataset
     batch_size = 64
 
-    data_path = os.path.join(work_dir, version, "dataset_associations")
+    data_path = os.path.join(work_dir, version, "dataset_cleaned")
     model_save_path = data_path + '/output/' + encoder_name
 
     # Check if dataset exsist. If not, download and extract  it

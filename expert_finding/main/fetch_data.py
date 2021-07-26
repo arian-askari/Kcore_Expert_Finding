@@ -59,26 +59,7 @@ def build_v1(config, parameters):
                                                 )
     dataset.save(cleaned_path)
 
-    # Build subgraph for associations
-    print("Creating associations sub graph dataset")
-    associations_path = os.path.join(data_folder, "dataset_associations")
-    associations_stats_path = os.path.join(parameters["dump_dir"], "dataset_v1_stats_associations")
-    expert_finding.data.io.check_and_create_dir(associations_path)
-    expert_finding.data.io.check_and_create_dir(associations_stats_path)
-    dataset.clean_associations(max_documents_per_candidates=100, min_documents_per_candidates=1)
-    documents_set, candidates_set = expert_finding.tools.graphs.extract_experts_associations_subgraph(
-        dataset,
-        length_walks=5,
-        number_of_walks=50
-    )
-    dataset.reduce(documents_set, candidates_set)
-    expert_finding.evaluation.visual.plot_stats(dataset,
-                                                associations_stats_path,
-                                                min_documents=10,
-                                                min_in_citations=10,
-                                                min_out_citations=10
-                                                )
-    dataset.save(associations_path)
+
 
 
 def build_v2(config, parameters):
@@ -119,26 +100,6 @@ def build_v2(config, parameters):
                                                 )
     dataset.save(cleaned_path)
 
-    # Build subgraph for associations
-    print("Creating associations sub graph dataset")
-    associations_path = os.path.join(data_folder, "dataset_associations")
-    associations_stats_path = os.path.join(parameters["dump_dir"], "dataset_v2_stats_associations")
-    expert_finding.data.io.check_and_create_dir(associations_path)
-    expert_finding.data.io.check_and_create_dir(associations_stats_path)
-    dataset.clean_associations(max_documents_per_candidates=100, min_documents_per_candidates=1)
-    documents_set, candidates_set = expert_finding.tools.graphs.extract_experts_associations_subgraph(
-        dataset,
-        length_walks=5,
-        number_of_walks=50
-    )
-    dataset.reduce(documents_set, candidates_set)
-    expert_finding.evaluation.visual.plot_stats(dataset,
-                                                associations_stats_path,
-                                                min_documents=10,
-                                                min_in_citations=10,
-                                                min_out_citations=10
-                                                )
-    dataset.save(associations_path)
 
 
 def build_v3(config, parameters):
@@ -184,23 +145,3 @@ def build_v3(config, parameters):
                                                 )
     dataset.save(cleaned_path)
 
-    # Build subgraph for associations
-    print("Creating associations sub graph dataset")
-    associations_path = os.path.join(data_folder, "dataset_associations")
-    associations_stats_path = os.path.join(parameters["dump_dir"], "dataset_v3_stats_associations")
-    expert_finding.data.io.check_and_create_dir(associations_path)
-    expert_finding.data.io.check_and_create_dir(associations_stats_path)
-    dataset.clean_associations(max_documents_per_candidates=100, min_documents_per_candidates=1)
-    documents_set, candidates_set = expert_finding.tools.graphs.extract_experts_associations_subgraph(
-        dataset,
-        length_walks=5,
-        number_of_walks=50
-    )
-    dataset.reduce(documents_set, candidates_set)
-    expert_finding.evaluation.visual.plot_stats(dataset,
-                                                associations_stats_path,
-                                                min_documents=10,
-                                                min_in_citations=10,
-                                                min_out_citations=10
-                                                )
-    dataset.save(associations_path)
